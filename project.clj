@@ -4,7 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v20.html"}
   :source-paths ["src/clj"]
-  :javac-options ["-Xlint:unchecked" "-target" "1.7" "-source" "1.7"]
+  :javac-options ["-Xlint:unchecked" "-target" "1.8" "-source" "1.8"]
   :java-source-paths ["src/java"]
   :plugins [[lein-codox "0.10.7"]
             [lein-jmh "0.3.0"]]
