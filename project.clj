@@ -1,4 +1,4 @@
-(defproject alpha-prosoft/jsonista "0.2.8"
+(defproject alpha-prosoft/jsonista "0.2.9"
   :description "Clojure library for fast JSON encoding and decoding."
   :url "https://github.com/alpha-prosoft/jsonista"
   :license {:name "Eclipse Public License"
