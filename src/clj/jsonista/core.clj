@@ -59,7 +59,10 @@
     PersistentHashMapDeserializer
     PersistentVectorDeserializer
     SymbolSerializer
-    RatioSerializer FunctionalKeywordSerializer)
+    RatioSerializer
+    FunctionalPersistentVectorDeserializer
+    FunctionalPersistentHashMapDeserializer
+    FunctionalKeywordSerializer)
    (com.fasterxml.jackson.core JsonGenerator$Feature JsonFactory)
    (com.fasterxml.jackson.annotation JsonInclude$Include)
    (com.fasterxml.jackson.databind
@@ -69,8 +72,8 @@
    (java.io InputStream Writer File OutputStream DataOutput Reader)
    (java.net URL)
    (com.fasterxml.jackson.datatype.jsr310 JavaTimeModule)
-   (java.util List Map Date)
-   (clojure.lang Keyword Ratio Symbol)))
+   (java.util List Map)
+   (clojure.lang Keyword)))
 
 (defn- ^Module clojure-module
   "Create a Jackson Databind module to support Clojure datastructures.
