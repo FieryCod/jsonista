@@ -76,17 +76,21 @@
   "Create a Jackson Databind module to support Clojure datastructures.
 
   See [[object-mapper]] docstring for the documentation of the options."
-  [{:keys [encode-key-fn decode-key-fn encoders date-format]
-    :or {encode-key-fn true, decode-key-fn false}}]
+  [{:keys [encode-key-fn decode-key-fn encoders date-format decode-fn]
+    :or   {encode-key-fn true, decode-key-fn false}}]
   (doto (SimpleModule. "Clojure")
-    (.addDeserializer List (PersistentVectorDeserializer.))
-    (.addDeserializer Map (PersistentHashMapDeserializer.))
-    (.addSerializer Keyword (KeywordSerializer. false))
-    (.addSerializer Ratio (RatioSerializer.))
-    (.addSerializer Symbol (SymbolSerializer.))
-    (.addSerializer Date (if date-format
-                           (DateSerializer. date-format)
-                           (DateSerializer.)))
+    (.addDeserializer java.util.List (if (fn? decode-fn)
+                                       (FunctionalPersistentVectorDeserializer. decode-fn)
+                                       (PersistentVectorDeserializer.)))
+    (.addDeserializer java.util.Map (if (fn? decode-fn)
+                                      (FunctionalPersistentHashMapDeserializer. decode-fn)
+                                      (PersistentHashMapDeserializer.)))
+    (.addSerializer clojure.lang.Keyword (KeywordSerializer. false))
+    (.addSerializer clojure.lang.Ratio (RatioSerializer.))
+    (.addSerializer clojure.lang.Symbol (SymbolSerializer.))
+    (.addSerializer java.util.Date (if date-format
+                                     (DateSerializer. date-format)
+                                     (DateSerializer.)))
     (as-> module
       (doseq [[type encoder] encoders]
         (cond
